@@ -7,6 +7,8 @@
     flex-direction: column; }
   .classic .cursor {
     background-color: #d7d7d7; }
+  .classic a {
+    color: #83f52c; }
 
 #commandLog {
   display: inline-flex;
@@ -17,7 +19,7 @@
   height: 16px;
   width: 11px;
   top: 2px;
-  right: -16px;
+  right: -15px;
   animation: blinker 1s linear infinite; }
 
 @keyframes blinker {
@@ -26,4 +28,5 @@
 
 .prompt {
   position: relative;
-  display: inline-block; }
+  display: inline-block;
+  align-self: flex-start; }

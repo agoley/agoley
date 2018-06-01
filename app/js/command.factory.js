@@ -11,6 +11,10 @@ var _http = require('./http');
 
 var _rxjs = require('rxjs');
 
+var _command = require('./command');
+
+var _bin = require('./bin');
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var CommandFactory = exports.CommandFactory = function () {
@@ -18,6 +22,8 @@ var CommandFactory = exports.CommandFactory = function () {
     _classCallCheck(this, CommandFactory);
 
     this.http = new _http.Http();
+    this.bin = new _bin.Bin();
+
     this.initPrompt();
 
     document.onkeyup = this.onInput.bind(this);
@@ -50,39 +56,67 @@ var CommandFactory = exports.CommandFactory = function () {
   }, {
     key: 'onInput',
     value: function onInput(event) {
+      if (event.code === 'Backspace') {
+        this.onBackspace();
+      }
       if (event.code === 'Enter') {
         this.proccessCommand();
+      } else if (this.isValidCommandInput(event)) {
+        this.commandCurrent.textNode.innerHTML = this.commandCurrent.textNode.innerHTML + event.key;
+      }
+    }
+  }, {
+    key: 'isValidCommandInput',
+    value: function isValidCommandInput(event) {
+      return event.key.length === 1;
+    }
+  }, {
+    key: 'onBackspace',
+    value: function onBackspace() {
+      if (this.commandCurrent.textNode.innerHTML.length > 0) {
+        this.commandCurrent.textNode.innerHTML = this.commandCurrent.textNode.innerHTML.substring(0, this.commandCurrent.textNode.innerHTML.length - 1);
       }
     }
   }, {
     key: 'newPrompt',
     value: function newPrompt() {
       this.removeCursor(this.commandCurrent);
-      var promptNode = this.promptNodeTemplate.cloneNode(true);
-      document.getElementById('commandLog').appendChild(promptNode);
-      this.commandCurrent = promptNode;
+      this.createNewCommand();
       this.addCursor(this.commandCurrent);
+    }
+  }, {
+    key: 'createNewCommand',
+    value: function createNewCommand() {
+      var promptNode = this.promptNodeTemplate.cloneNode(true);
+
+      var commandTextNode = document.createElement('span');
+      commandTextNode.classList.add('command-text');
+      promptNode.appendChild(commandTextNode);
+      this.commandCurrent = new _command.Command(promptNode, commandTextNode);
+
+      document.getElementById('commandLog').appendChild(promptNode);
     }
   }, {
     key: 'proccessCommand',
     value: function proccessCommand() {
+      this.bin.invoke(this.commandCurrent.textNode.innerHTML);
       this.newPrompt();
     }
   }, {
     key: 'removeCursor',
-    value: function removeCursor(node) {
-      if (node) {
-        node.removeChild(this.cursorNode);
+    value: function removeCursor(command) {
+      if (command) {
+        command.node.removeChild(this.cursorNode);
       }
     }
   }, {
     key: 'addCursor',
-    value: function addCursor(node) {
+    value: function addCursor(command) {
       if (!this.cursorNode) {
         this.cursorNode = document.createElement('div');
         this.cursorNode.classList.add('cursor');
       }
-      node.appendChild(this.cursorNode);
+      command.node.appendChild(this.cursorNode);
     }
   }, {
     key: 'logCommand',

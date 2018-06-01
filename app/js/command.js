@@ -6,14 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// @ts-ignore
-var Command = function Command(directory, reference, state, value) {
+var Command = exports.Command = function Command(node, textNode) {
   _classCallCheck(this, Command);
 
-  this.directory = directory;
-  this.reference = reference;
-  this.state = state;
-  this.value = value;
+  this.node = node;
+  this.textNode = textNode;
 };
-
-exports.default = Command;

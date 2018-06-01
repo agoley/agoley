@@ -1,6 +1,9 @@
 import { Http } from './http';
 import { forkJoin, interval } from 'rxjs';
 
+import { Command } from './command';
+import { Bin } from './bin';
+
 export class CommandFactory {
   promptNodeTemplate;
   commandHistory;
@@ -9,6 +12,8 @@ export class CommandFactory {
 
   constructor() {
     this.http = new Http();
+    this.bin = new Bin();
+
     this.initPrompt();
 
     document.onkeyup = this.onInput.bind(this);
@@ -37,35 +42,64 @@ export class CommandFactory {
   }
 
   onInput(event) {
+    if (event.code === 'Backspace') {
+      this.onBackspace();
+    }
     if (event.code === 'Enter') {
       this.proccessCommand();
+    } else if (this.isValidCommandInput(event)) {
+      this.commandCurrent.textNode.innerHTML =
+        this.commandCurrent.textNode.innerHTML + event.key;
+    }
+  }
+
+  isValidCommandInput(event) {
+    return event.key.length === 1;
+  }
+
+  onBackspace() {
+    if (this.commandCurrent.textNode.innerHTML.length > 0) {
+      this.commandCurrent.textNode.innerHTML = this.commandCurrent.textNode.innerHTML.substring(
+        0,
+        this.commandCurrent.textNode.innerHTML.length - 1
+      );
     }
   }
 
   newPrompt() {
     this.removeCursor(this.commandCurrent);
-    const promptNode = this.promptNodeTemplate.cloneNode(true);
-    document.getElementById('commandLog').appendChild(promptNode);
-    this.commandCurrent = promptNode;
+    this.createNewCommand();
     this.addCursor(this.commandCurrent);
   }
 
+  createNewCommand() {
+    const promptNode = this.promptNodeTemplate.cloneNode(true);
+
+    const commandTextNode = document.createElement('span');
+    commandTextNode.classList.add('command-text');
+    promptNode.appendChild(commandTextNode);
+    this.commandCurrent = new Command(promptNode, commandTextNode);
+
+    document.getElementById('commandLog').appendChild(promptNode);
+  }
+
   proccessCommand() {
+    this.bin.invoke(this.commandCurrent.textNode.innerHTML);
     this.newPrompt();
   }
 
-  removeCursor(node) {
-    if (node) {
-      node.removeChild(this.cursorNode);
+  removeCursor(command) {
+    if (command) {
+      command.node.removeChild(this.cursorNode);
     }
   }
 
-  addCursor(node) {
+  addCursor(command) {
     if (!this.cursorNode) {
       this.cursorNode = document.createElement('div');
       this.cursorNode.classList.add('cursor');
     }
-    node.appendChild(this.cursorNode);
+    command.node.appendChild(this.cursorNode);
   }
 
   logCommand(command) {

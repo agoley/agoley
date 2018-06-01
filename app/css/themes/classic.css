@@ -7,3 +7,5 @@
     flex-direction: column; }
   .classic .cursor {
     background-color: #d7d7d7; }
+  .classic a {
+    color: #83f52c; }

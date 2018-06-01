@@ -1,0 +1,55 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Bin = exports.Bin = function () {
+  function Bin() {
+    _classCallCheck(this, Bin);
+
+    this.commands = [{ name: 'Ask-Alex', fn: this.askAlex }];
+  }
+
+  _createClass(Bin, [{
+    key: 'invoke',
+    value: function invoke(commandStr) {
+      var commandArr = commandStr.split(' ');
+      var name = commandArr[0];
+
+      var command = this.commands.filter(function (c) {
+        return c.name === name;
+      });
+      if (command.length > 0) {
+        command[0].fn();
+      } else {
+        // TODO: handle unkown input.
+        console.log('Unkown command');
+      }
+    }
+  }, {
+    key: 'askAlex',
+    value: function askAlex() {
+      // TODO: list some helpful stuff.
+      console.log('you asked Alex');
+
+      var askAlexNode = document.createElement('p');
+      askAlexNode.classList.add('ask-alex');
+      askAlexNode.innerHTML = 'Hi, thanks for checking out my portfolio. It is currently being worked on and lots of cool stuff is coming. Check out its progress here: ';
+
+      var repositorylinkNode = document.createElement('a');
+      repositorylinkNode.setAttribute('href', 'https://github.com/agoley/agoley');
+      repositorylinkNode.innerText = 'https://github.com/agoley/agoley';
+
+      askAlexNode.appendChild(repositorylinkNode);
+
+      document.getElementById('commandLog').appendChild(askAlexNode);
+    }
+  }]);
+
+  return Bin;
+}();

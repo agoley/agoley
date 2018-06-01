@@ -1,5 +1,6 @@
 $background: rgb(30, 30, 30);
 $foreground: rgb(215, 215, 215);
+$neon-green: #83f52c;
 
 .classic {
   background-color: $background;
@@ -13,5 +14,9 @@ $foreground: rgb(215, 215, 215);
 
   .cursor {
     background-color: $foreground;
+  }
+
+  a {
+    color: $neon-green;
   }
 }

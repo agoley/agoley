@@ -43,7 +43,12 @@ gulp.task('useref', ['webpack'], function() {
       gutil.log(gutil.colors.red('[Error]'), err.toString());
     })
     .pipe(gulpIf('*.css', cssnano()))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('dist'))
+    .pipe(
+      browserSync.reload({
+        stream: true
+      })
+    );
 });
 
 gulp.task('sass', function() {
@@ -80,7 +85,7 @@ gulp.task('build', [
 gulp.task('watch', ['browserSync'], function() {
   gulp.watch('app/scss/**/*.scss', ['sass']);
   gulp.watch('app/*.html', browserSync.reload);
-  gulp.watch('app/es6/**/*.js', browserSync.reload);
+  gulp.watch('app/es6/**/*.js', ['build'], browserSync.reload);
 });
 
 gulp.task('browserSync', ['build'], function() {

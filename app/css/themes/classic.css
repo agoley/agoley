@@ -2,3 +2,8 @@
   background-color: #1e1e1e;
   color: #d7d7d7;
   font-family: 'Roboto Mono', monospace; }
+  .classic #commandLog {
+    display: inline-flex;
+    flex-direction: column; }
+  .classic .cursor {
+    background-color: #d7d7d7; }

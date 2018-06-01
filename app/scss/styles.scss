@@ -1,1 +1,28 @@
 @import 'themes/classic.scss';
+
+#commandLog {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.cursor {
+  position: absolute;
+  height: 16px;
+  width: 11px;
+
+  top: 2px;
+  right: -16px;
+
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.prompt {
+  position: relative;
+  display: inline-block;
+}

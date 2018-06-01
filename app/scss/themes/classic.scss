@@ -5,4 +5,13 @@ $foreground: rgb(215, 215, 215);
   background-color: $background;
   color: $foreground;
   font-family: 'Roboto Mono', monospace;
+
+  #commandLog {
+    display: inline-flex;
+    flex-direction: column;
+  }
+
+  .cursor {
+    background-color: $foreground;
+  }
 }

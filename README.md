@@ -6,6 +6,12 @@ Thanks for checking out my portfolio, it's currently under development but you c
 
 
 clone
+
+
 npm i
+
+
 gulp watch
+
+
 

@@ -19,7 +19,8 @@ More commands...
 
 Directory traversal
 
-Integrate my snake game and pacman games
+games (see snek, and pacman repos)
+  leaderboard
 
 add 'files'
 

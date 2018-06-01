@@ -4,4 +4,3 @@ import { CommandFactory } from './command.factory';
 var app = {};
 // @ts-ignore
 app.commandFactory = new CommandFactory();
-app.commandFactory.buildCommandNode();

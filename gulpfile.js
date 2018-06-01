@@ -23,7 +23,12 @@ gulp.task('clean:js', function() {
 gulp.task('compile-es6', ['clean:dist', 'clean:js'], function() {
   return gulp
     .src('app/es6/**/*.js')
-    .pipe(babel({ presets: ['es2015'] }))
+    .pipe(
+      babel({
+        presets: ['es2015', 'stage-0'],
+        plugins: ['transform-class-properties']
+      })
+    )
     .pipe(gulp.dest('app/js'));
 });
 

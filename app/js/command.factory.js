@@ -18,24 +18,33 @@ var CommandFactory = exports.CommandFactory = function () {
     _classCallCheck(this, CommandFactory);
 
     this.http = new _http.Http();
+    this.initPrompt();
   }
 
   _createClass(CommandFactory, [{
-    key: 'buildCommandNode',
-    value: function buildCommandNode(command) {
-      var commandNode = document.createElement('div');
-      commandNode.classList.add('command');
+    key: 'initPrompt',
+    value: function initPrompt(command) {
+      var _this = this;
 
-      var prePromptNode = document.createElement('div');
-      prePromptNode.classList.add('pre-prompt');
-
-      var prePromptUserHostNode = document.createElement('div');
-      prePromptUserHostNode.classList.add('pre-prompt-user-host');
+      this.promptNodeTemplate = document.createElement('div');
+      this.promptNodeTemplate.classList.add('prompt');
 
       (0, _rxjs.forkJoin)([this.http.get('https://ipinfo.io/?callback=', null, true), this.http.get('https://uzby.com/api.php?min=3&max=8', null, true)]).subscribe(function (data) {
-        console.log(JSON.parse(data[0]));
-        console.log(data[1]);
+        _this.promptNodeTemplate.textContent = _this.getUserAndHost(data) + ' ~> ';
+        var promptNode = _this.promptNodeTemplate.cloneNode(true);
+        _this.newPrompt(promptNode);
       });
+    }
+  }, {
+    key: 'getUserAndHost',
+    value: function getUserAndHost(data) {
+      var ipinfo = JSON.parse(data[0]);
+      return data[1] + '@' + ipinfo.ip;
+    }
+  }, {
+    key: 'newPrompt',
+    value: function newPrompt(promptNode) {
+      document.getElementById('commandLog').appendChild(promptNode);
     }
   }]);
 

@@ -34,7 +34,7 @@ var CommandFactory = exports.CommandFactory = function () {
     value: function initPrompt(command) {
       var _this = this;
 
-      (0, _rxjs.forkJoin)([this.http.get('https://ipinfo.io/?callback=', null, true), this.http.get('https://uzby.com/api.php?min=3&max=8', null, true)]).subscribe(function (data) {
+      (0, _rxjs.forkJoin)([this.http.get('https://ipinfo.io/?callback=', null, true), this.http.get('https://cors.io/?https://uzby.com/api.php?min=3&max=8', null, true)]).subscribe(function (data) {
         _this.constructPromptNodeTemplate(data);
         _this.newPrompt();
       });

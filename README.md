@@ -7,31 +7,35 @@ Use the app: https://agoley.github.io/agoley/
 
 ## Development
 
+### requirments
+Node (latest)
+NPM (latest)
 
-clone
+### Run
+clone Repo
 
 npm i
 
 gulp watch
 
-## Comming up...
+## Coming up...
+### Things being developed in no order
 
-Clean up after forcing structure for github pages
+- Clean up after forcing structure for github pages
 
-Mobile input support
+- Mobile input support
 
-More commands...
+- More commands... 
 
-Directory traversal
+- scroll to prompt on overflow
 
-games (see snek, and pacman repos)
-  leaderboard
+- Directory traversal
 
-add 'files'
+- games (see snek, and pacman repos)
 
-  work history
-  
-  contact
+- games leaderboard
+
+- add 'files' (work history, contact)
   
   
 

@@ -7,7 +7,7 @@ Use the app: https://agoley.github.io/agoley/
 
 ## Development
 
-### requirements
+### Requirements
 Node (latest)
 NPM (latest)
 

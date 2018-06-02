@@ -7,7 +7,7 @@ Use the app: https://agoley.github.io/agoley/
 
 ## Development
 
-### requirments
+### requirements
 Node (latest)
 NPM (latest)
 
@@ -19,7 +19,7 @@ npm i
 gulp watch
 
 ## Coming up...
-### Things being developed in no order
+### Things being developed, in no order
 
 - Clean up after forcing structure for github pages
 

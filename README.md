@@ -36,6 +36,8 @@ gulp watch
 - games leaderboard
 
 - add 'files' (work history, contact)
+
+- Themes
   
   
 

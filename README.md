@@ -18,6 +18,8 @@ gulp watch
 
 Clean up after forcing structure for github pages
 
+Mobile input support
+
 More commands...
 
 Directory traversal

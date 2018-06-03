@@ -38,6 +38,8 @@ gulp watch
 - add 'files' (work history, contact)
 
 - Themes
+
+- Algorithms
   
   
 

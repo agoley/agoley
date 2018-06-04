@@ -73,7 +73,7 @@ gulp.task('sass', function() {
   return gulp
     .src('app/scss/**/*.scss')
     .pipe(sass())
-    .pipe(gulp.dest('app/css'))
+    .pipe(gulp.dest('css'))
     .pipe(
       browserSync.reload({
         stream: true
@@ -88,6 +88,7 @@ gulp.task('fonts', function() {
 gulp.task('images', function() {
   return gulp.src('app/images/**/*').pipe(gulp.dest('assets/images'));
 });
+
 
 gulp.task('build', [
   'clean:css',

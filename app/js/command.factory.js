@@ -61,9 +61,9 @@ var CommandFactory = exports.CommandFactory = function () {
           return;
         }
 
-        if (!this.commandHistoryIndex) {
+        if (typeof this.commandHistoryIndex !== 'number') {
           this.commandHistoryIndex = this.commandHistory.length - 1;
-        } else if (this.commandHistoryIndex >= 0) {
+        } else if (this.commandHistoryIndex > 0) {
           this.commandHistoryIndex--;
         }
 
@@ -78,12 +78,10 @@ var CommandFactory = exports.CommandFactory = function () {
           return;
         }
 
-        if (!this.commandHistoryIndex) {
-          this.commandHistoryIndex = 1;
-        } else if (this.commandHistoryIndex <= this.commandHistory.length) {
+        if (typeof this.commandHistoryIndex !== 'number') {
+          this.commandHistoryIndex = 0;
+        } else if (this.commandHistoryIndex < this.commandHistory.length) {
           this.commandHistoryIndex++;
-        } else {
-          this.commandHistoryIndex = 1;
         }
 
         if (this.commandHistoryIndex >= 0 && this.commandHistory[this.commandHistoryIndex]) {
@@ -116,7 +114,7 @@ var CommandFactory = exports.CommandFactory = function () {
   }, {
     key: 'newPrompt',
     value: function newPrompt() {
-      this.commandHistoryIndex = 0;
+      this.commandHistoryIndex = null;
       this.logCommand(this.commandCurrent);
       this.removeCursor(this.commandCurrent);
       this.createNewCommand();
@@ -159,10 +157,12 @@ var CommandFactory = exports.CommandFactory = function () {
   }, {
     key: 'logCommand',
     value: function logCommand(command) {
-      if (!this.commandHistory) {
-        this.commandHistory = [command];
-      } else {
-        this.commandHistory.push(command);
+      if (this.commandCurrent && this.commandCurrent.textNode.innerHTML.length > 0) {
+        if (!this.commandHistory) {
+          this.commandHistory = [command];
+        } else {
+          this.commandHistory.push(command);
+        }
       }
     }
   }]);

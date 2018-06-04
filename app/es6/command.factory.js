@@ -52,9 +52,9 @@ export class CommandFactory {
         return;
       }
 
-      if (!this.commandHistoryIndex) {
+      if (typeof this.commandHistoryIndex !== 'number') {
         this.commandHistoryIndex = this.commandHistory.length - 1;
-      } else if (this.commandHistoryIndex >= 0 ) {
+      } else if (this.commandHistoryIndex > 0) {
         this.commandHistoryIndex--;
       }
 
@@ -69,12 +69,10 @@ export class CommandFactory {
         return;
       }
 
-      if (!this.commandHistoryIndex) {
-        this.commandHistoryIndex = 1;
-      } else if (this.commandHistoryIndex <= this.commandHistory.length ) {
+      if (typeof this.commandHistoryIndex !== 'number') {
+        this.commandHistoryIndex = 0;
+      } else if (this.commandHistoryIndex < this.commandHistory.length) {
         this.commandHistoryIndex++;
-      } else {
-        this.commandHistoryIndex = 1;
       }
 
       if (this.commandHistoryIndex >= 0 && this.commandHistory[this.commandHistoryIndex]) {
@@ -108,7 +106,7 @@ export class CommandFactory {
   }
 
   newPrompt() {
-    this.commandHistoryIndex = 0;
+    this.commandHistoryIndex = null;
     this.logCommand(this.commandCurrent);
     this.removeCursor(this.commandCurrent);
     this.createNewCommand();
@@ -146,10 +144,12 @@ export class CommandFactory {
   }
 
   logCommand(command) {
-    if (!this.commandHistory) {
-      this.commandHistory = [command];
-    } else {
-      this.commandHistory.push(command);
+    if (this.commandCurrent && this.commandCurrent.textNode.innerHTML.length > 0) {
+      if (!this.commandHistory) {
+        this.commandHistory = [command];
+      } else {
+        this.commandHistory.push(command);
+      }
     }
   }
 }

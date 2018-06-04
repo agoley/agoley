@@ -9,6 +9,7 @@ export class CommandFactory {
   commandHistory;
   commandCurrent;
   cursorNode;
+  commandHistoryIndex;
 
   constructor() {
     this.http = new Http();
@@ -46,6 +47,42 @@ export class CommandFactory {
   }
 
   onInput(event) {
+    if (event.code === 'ArrowUp') {
+      if (!this.commandHistory || this.commandHistory.length === 0) {
+        return;
+      }
+
+      if (!this.commandHistoryIndex) {
+        this.commandHistoryIndex = this.commandHistory.length - 1;
+      } else if (this.commandHistoryIndex >= 0 ) {
+        this.commandHistoryIndex--;
+      }
+
+      if (this.commandHistoryIndex >= 0 && this.commandHistory[this.commandHistoryIndex]) {
+        let cmd = this.commandHistory[this.commandHistoryIndex].textNode.innerHTML;
+        this.commandCurrent.textNode.innerHTML = cmd;
+      }
+    }
+
+    if (event.code === 'ArrowDown') {
+      if (!this.commandHistory || this.commandHistory.length === 0) {
+        return;
+      }
+
+      if (!this.commandHistoryIndex) {
+        this.commandHistoryIndex = 1;
+      } else if (this.commandHistoryIndex <= this.commandHistory.length ) {
+        this.commandHistoryIndex++;
+      } else {
+        this.commandHistoryIndex = 1;
+      }
+
+      if (this.commandHistoryIndex >= 0 && this.commandHistory[this.commandHistoryIndex]) {
+        let cmd = this.commandHistory[this.commandHistoryIndex].textNode.innerHTML;
+        this.commandCurrent.textNode.innerHTML = cmd;
+      }
+    }
+
     if (event.code === 'Backspace') {
       this.onBackspace();
     }
@@ -71,6 +108,8 @@ export class CommandFactory {
   }
 
   newPrompt() {
+    this.commandHistoryIndex = 0;
+    this.logCommand(this.commandCurrent);
     this.removeCursor(this.commandCurrent);
     this.createNewCommand();
     this.addCursor(this.commandCurrent);

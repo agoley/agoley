@@ -3428,6 +3428,42 @@ var CommandFactory = exports.CommandFactory = function () {
   }, {
     key: 'onInput',
     value: function onInput(event) {
+      if (event.code === 'ArrowUp') {
+        if (!this.commandHistory || this.commandHistory.length === 0) {
+          return;
+        }
+
+        if (!this.commandHistoryIndex) {
+          this.commandHistoryIndex = this.commandHistory.length - 1;
+        } else if (this.commandHistoryIndex >= 0) {
+          this.commandHistoryIndex--;
+        }
+
+        if (this.commandHistoryIndex >= 0 && this.commandHistory[this.commandHistoryIndex]) {
+          var cmd = this.commandHistory[this.commandHistoryIndex].textNode.innerHTML;
+          this.commandCurrent.textNode.innerHTML = cmd;
+        }
+      }
+
+      if (event.code === 'ArrowDown') {
+        if (!this.commandHistory || this.commandHistory.length === 0) {
+          return;
+        }
+
+        if (!this.commandHistoryIndex) {
+          this.commandHistoryIndex = 1;
+        } else if (this.commandHistoryIndex <= this.commandHistory.length) {
+          this.commandHistoryIndex++;
+        } else {
+          this.commandHistoryIndex = 1;
+        }
+
+        if (this.commandHistoryIndex >= 0 && this.commandHistory[this.commandHistoryIndex]) {
+          var _cmd = this.commandHistory[this.commandHistoryIndex].textNode.innerHTML;
+          this.commandCurrent.textNode.innerHTML = _cmd;
+        }
+      }
+
       if (event.code === 'Backspace') {
         this.onBackspace();
       }
@@ -3452,6 +3488,8 @@ var CommandFactory = exports.CommandFactory = function () {
   }, {
     key: 'newPrompt',
     value: function newPrompt() {
+      this.commandHistoryIndex = 0;
+      this.logCommand(this.commandCurrent);
       this.removeCursor(this.commandCurrent);
       this.createNewCommand();
       this.addCursor(this.commandCurrent);

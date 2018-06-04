@@ -3623,7 +3623,16 @@ var Bin = exports.Bin = function () {
       repositorylinkNode.setAttribute('href', 'https://github.com/agoley/agoley');
       repositorylinkNode.innerText = 'https://github.com/agoley/agoley';
 
+      var linkedinNode = document.createElement('p');
+      linkedinNode.innerText = 'Connect with me on LinkedIn: ';
+
+      var linkedinLinkNode = document.createElement('a');
+      linkedinLinkNode.setAttribute('href', 'https://www.linkedin.com/in/alex-goley-6230479b/');
+      linkedinLinkNode.innerText = 'https://www.linkedin.com/in/alex-goley-6230479b/';
+      linkedinNode.appendChild(linkedinLinkNode);
+
       askAlexNode.appendChild(repositorylinkNode);
+      askAlexNode.appendChild(linkedinNode);
 
       document.getElementById('commandLog').appendChild(askAlexNode);
     }

@@ -2,10 +2,17 @@ export class Bin {
   commands;
 
   constructor() {
-    this.commands = [{ name: 'Ask-Alex', fn: this.askAlex }];
+    this.commands = [
+      { name: 'Ask-Alex', fn: this.askAlex },
+      { name: 'clear', fn: this.clear }
+    ];
   }
 
   invoke(commandStr) {
+    if (!commandStr || commandStr.length === 0) {
+      return;
+    }
+
     const commandArr = commandStr.split(' ');
     const name = commandArr[0];
 
@@ -16,7 +23,12 @@ export class Bin {
       command[0].fn();
     } else {
       // TODO: handle unkown input.
-      console.log('Unkown command');
+      console.log('Unknown command');
+
+      const unknownNode = document.createElement('p');
+      unknownNode.innerText = "Unknown command, try Ask-Alex for help."
+
+      document.getElementById('commandLog').appendChild(unknownNode);
     }
   }
 
@@ -36,5 +48,9 @@ export class Bin {
     askAlexNode.appendChild(repositorylinkNode);
 
     document.getElementById('commandLog').appendChild(askAlexNode);
+  }
+
+  clear() {
+    document.getElementById('commandLog').innerHTML = '';
   }
 }

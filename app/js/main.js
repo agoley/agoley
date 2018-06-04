@@ -3543,12 +3543,16 @@ var Bin = exports.Bin = function () {
   function Bin() {
     _classCallCheck(this, Bin);
 
-    this.commands = [{ name: 'Ask-Alex', fn: this.askAlex }];
+    this.commands = [{ name: 'Ask-Alex', fn: this.askAlex }, { name: 'clear', fn: this.clear }];
   }
 
   _createClass(Bin, [{
     key: 'invoke',
     value: function invoke(commandStr) {
+      if (!commandStr || commandStr.length === 0) {
+        return;
+      }
+
       var commandArr = commandStr.split(' ');
       var name = commandArr[0];
 
@@ -3559,7 +3563,12 @@ var Bin = exports.Bin = function () {
         command[0].fn();
       } else {
         // TODO: handle unkown input.
-        console.log('Unkown command');
+        console.log('Unknown command');
+
+        var unknownNode = document.createElement('p');
+        unknownNode.innerText = "Unknown command, try Ask-Alex for help.";
+
+        document.getElementById('commandLog').appendChild(unknownNode);
       }
     }
   }, {
@@ -3579,6 +3588,11 @@ var Bin = exports.Bin = function () {
       askAlexNode.appendChild(repositorylinkNode);
 
       document.getElementById('commandLog').appendChild(askAlexNode);
+    }
+  }, {
+    key: 'clear',
+    value: function clear() {
+      document.getElementById('commandLog').innerHTML = '';
     }
   }]);
 

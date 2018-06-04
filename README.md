@@ -21,11 +21,7 @@ gulp watch
 ## Coming up...
 ### Things being developed, in no order
 
-- Clean up after forcing structure for github pages
-
 - Mobile input support
-
-- More commands... 
 
 - scroll to prompt on overflow
 
@@ -40,6 +36,8 @@ gulp watch
 - Themes
 
 - Algorithms
+
+- blog?
   
   
 

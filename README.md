@@ -36,6 +36,8 @@ gulp watch
 - Themes
 
 - Algorithms
+
+- blog?
   
   
 

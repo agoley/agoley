@@ -4,7 +4,8 @@ export class Bin {
   constructor() {
     this.commands = [
       { name: 'Ask-Alex', fn: this.askAlex },
-      { name: 'clear', fn: this.clear }
+      { name: 'clear', fn: this.clear },
+      { name: 'pwd', fn: this.pwd }
     ];
   }
 
@@ -61,5 +62,11 @@ export class Bin {
 
   clear() {
     document.getElementById('commandLog').innerHTML = '';
+  }
+
+  pwd() {
+    const pwdNode = document.createElement('p');
+    pwdNode.innerText = window.app.workingDirectory.getPathFromRoot();
+    document.getElementById('commandLog').appendChild(pwdNode);
   }
 }

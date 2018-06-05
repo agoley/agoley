@@ -12,7 +12,7 @@ var Bin = exports.Bin = function () {
   function Bin() {
     _classCallCheck(this, Bin);
 
-    this.commands = [{ name: 'Ask-Alex', fn: this.askAlex }, { name: 'clear', fn: this.clear }];
+    this.commands = [{ name: 'Ask-Alex', fn: this.askAlex }, { name: 'clear', fn: this.clear }, { name: 'pwd', fn: this.pwd }];
   }
 
   _createClass(Bin, [{
@@ -71,6 +71,13 @@ var Bin = exports.Bin = function () {
     key: 'clear',
     value: function clear() {
       document.getElementById('commandLog').innerHTML = '';
+    }
+  }, {
+    key: 'pwd',
+    value: function pwd() {
+      var pwdNode = document.createElement('p');
+      pwdNode.innerText = window.app.workingDirectory.getPathFromRoot();
+      document.getElementById('commandLog').appendChild(pwdNode);
     }
   }]);
 

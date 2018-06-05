@@ -1,6 +1,25 @@
 import { Http } from './http';
 import { CommandFactory } from './command.factory';
+import { Directory } from './directory';
+import { AppFile } from './app-file';
 
-var app = {};
+
+const app = {};
 // @ts-ignore
 app.commandFactory = new CommandFactory();
+const rootDirectory = new Directory('', null, []);
+const homeDirectory = new Directory('home', rootDirectory, []);
+rootDirectory.children.push(rootDirectory);
+const gamesDirectory = new Directory('games', homeDirectory, []);
+homeDirectory.children.push(gamesDirectory);
+const snakeFile = new AppFile(null, gamesDirectory, 'snake.sh')
+gamesDirectory.children.push(snakeFile);
+const pacmanFile = new AppFile(null, gamesDirectory, 'pacman.sh')
+gamesDirectory.children.push(pacmanFile);
+const leaderboardFile = new AppFile(null, gamesDirectory, 'leaderboard.txt');
+const algorithmsDirectory = new Directory('algorithms', homeDirectory, []);
+homeDirectory.children.push(algorithmsDirectory);
+app.workingDirectory = homeDirectory;
+
+
+window.app = app;

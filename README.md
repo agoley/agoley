@@ -18,14 +18,25 @@ npm i
 
 gulp watch
 
+## Available Commands
+
+- Ask-Alex
+
+- clear
+
+- pwd
+
+
 ## Coming up...
 ### Things being developed, in no order
+
+- Add available commands and description to Ask-Alex output
 
 - Mobile input support
 
 - scroll to prompt on overflow
 
-- Directory traversal
+- Directory traversal (ls, cd)
 
 - games (see snek, and pacman repos)
 

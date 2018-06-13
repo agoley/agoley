@@ -50,6 +50,7 @@ gulp watch
 
 - blog?
   
+- Routing (client-side)
   
 
 

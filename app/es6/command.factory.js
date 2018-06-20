@@ -122,6 +122,7 @@ export class CommandFactory {
     this.commandCurrent = new Command(promptNode, commandTextNode);
 
     document.getElementById('commandLog').appendChild(promptNode);
+    promptNode.scrollIntoView({behavior: "smooth", block: "start", inline: "end"});
   }
 
   proccessCommand() {

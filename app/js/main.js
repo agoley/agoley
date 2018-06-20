@@ -3524,6 +3524,7 @@ var CommandFactory = exports.CommandFactory = function () {
       this.commandCurrent = new _command.Command(promptNode, commandTextNode);
 
       document.getElementById('commandLog').appendChild(promptNode);
+      promptNode.scrollIntoView({ behavior: "smooth", block: "start", inline: "end" });
     }
   }, {
     key: 'proccessCommand',

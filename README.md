@@ -30,27 +30,25 @@ gulp watch
 ## Coming up...
 ### Things being developed, in no order
 
-- Add available commands and description to Ask-Alex output
+- Add available commands and description to Ask-Alex output - TODO
 
-- Mobile input support
+- Mobile input support - TODO
 
-- scroll to prompt on overflow
+- scroll to prompt on overflow - DONE
 
-- Directory traversal (ls, cd)
+- Directory traversal (ls, cd) - INPROGRESS
 
-- games (see snek, and pacman repos)
+- games (see snek, and pacman repos) - TODO
 
-- games leaderboard
+- games leaderboard - TODO
 
-- add 'files' (work history, contact)
+- add 'files' (work history, contact) - TODO
 
-- Themes
+- Themes - TODO
 
-- Algorithms
-
-- blog?
+- blog - TODO
   
-- Routing (client-side)
+- Routing (client-side) - TODO
   
 
 

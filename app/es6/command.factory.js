@@ -18,6 +18,8 @@ export class CommandFactory {
     this.initPrompt();
 
     document.onkeyup = this.onInput.bind(this);
+    window.addEventListener("keydown", this.onkeydown, false);
+    
   }
 
   initPrompt(command) {
@@ -46,8 +48,15 @@ export class CommandFactory {
     return data[1] + '@' + ipinfo.ip;
   }
 
+  onkeydown(event) {
+    if (event.code === 'ArrowUp' || event.code === 'ArrowDown') {
+      event.preventDefault();
+    }
+  }
+
   onInput(event) {
     if (event.code === 'ArrowUp') {
+      event.preventDefault();
       if (!this.commandHistory || this.commandHistory.length === 0) {
         return;
       }
@@ -65,6 +74,7 @@ export class CommandFactory {
     }
 
     if (event.code === 'ArrowDown') {
+      event.preventDefault();
       if (!this.commandHistory || this.commandHistory.length === 0) {
         return;
       }
@@ -122,7 +132,7 @@ export class CommandFactory {
     this.commandCurrent = new Command(promptNode, commandTextNode);
 
     document.getElementById('commandLog').appendChild(promptNode);
-    promptNode.scrollIntoView({behavior: "smooth", block: "start", inline: "end"});
+    promptNode.scrollIntoView({ behavior: "smooth", block: "start", inline: "end" });
   }
 
   proccessCommand() {

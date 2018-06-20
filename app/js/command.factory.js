@@ -27,6 +27,7 @@ var CommandFactory = exports.CommandFactory = function () {
     this.initPrompt();
 
     document.onkeyup = this.onInput.bind(this);
+    window.addEventListener("keydown", this.onkeydown, false);
   }
 
   _createClass(CommandFactory, [{
@@ -54,9 +55,17 @@ var CommandFactory = exports.CommandFactory = function () {
       return data[1] + '@' + ipinfo.ip;
     }
   }, {
+    key: 'onkeydown',
+    value: function onkeydown(event) {
+      if (event.code === 'ArrowUp' || event.code === 'ArrowDown') {
+        event.preventDefault();
+      }
+    }
+  }, {
     key: 'onInput',
     value: function onInput(event) {
       if (event.code === 'ArrowUp') {
+        event.preventDefault();
         if (!this.commandHistory || this.commandHistory.length === 0) {
           return;
         }
@@ -74,6 +83,7 @@ var CommandFactory = exports.CommandFactory = function () {
       }
 
       if (event.code === 'ArrowDown') {
+        event.preventDefault();
         if (!this.commandHistory || this.commandHistory.length === 0) {
           return;
         }

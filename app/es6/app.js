@@ -17,9 +17,8 @@ gamesDirectory.children.push(snakeFile);
 const pacmanFile = new AppFile(null, gamesDirectory, 'pacman.sh')
 gamesDirectory.children.push(pacmanFile);
 const leaderboardFile = new AppFile(null, gamesDirectory, 'leaderboard.txt');
-const algorithmsDirectory = new Directory('algorithms', homeDirectory, []);
-homeDirectory.children.push(algorithmsDirectory);
 app.workingDirectory = homeDirectory;
-
+const blogDirectory = new Directory('blog', homeDirectory, []);
+homeDirectory.children.push(blogDirectory);
 
 window.app = app;

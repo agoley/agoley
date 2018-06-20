@@ -21,8 +21,8 @@ gamesDirectory.children.push(snakeFile);
 var pacmanFile = new _appFile.AppFile(null, gamesDirectory, 'pacman.sh');
 gamesDirectory.children.push(pacmanFile);
 var leaderboardFile = new _appFile.AppFile(null, gamesDirectory, 'leaderboard.txt');
-var algorithmsDirectory = new _directory.Directory('algorithms', homeDirectory, []);
-homeDirectory.children.push(algorithmsDirectory);
 app.workingDirectory = homeDirectory;
+var blogDirectory = new _directory.Directory('blog', homeDirectory, []);
+homeDirectory.children.push(blogDirectory);
 
 window.app = app;

@@ -12,7 +12,7 @@ var Bin = exports.Bin = function () {
   function Bin() {
     _classCallCheck(this, Bin);
 
-    this.commands = [{ name: 'Ask-Alex', fn: this.askAlex }, { name: 'clear', fn: this.clear }, { name: 'pwd', fn: this.pwd }];
+    this.commands = [{ name: 'Ask-Alex', fn: this.askAlex }, { name: 'clear', fn: this.clear }, { name: 'pwd', fn: this.pwd }, { name: 'ls', fn: this.list }];
   }
 
   _createClass(Bin, [{
@@ -78,6 +78,26 @@ var Bin = exports.Bin = function () {
       var pwdNode = document.createElement('p');
       pwdNode.innerText = window.app.workingDirectory.getPathFromRoot();
       document.getElementById('commandLog').appendChild(pwdNode);
+    }
+  }, {
+    key: 'list',
+    value: function list() {
+      var lsNode = document.createElement('div');
+      lsNode.classList.add('ls-node');
+
+      app.workingDirectory.children.forEach(function (i) {
+        var node = document.createElement('div');
+        if (i.isDirectory) {
+          node.innerHTML = i.name + '/';
+        } else {
+          node.innerHTML = i.name;
+        }
+        node.innerHTML;
+        node.classList.add('ls-item-node');
+        lsNode.appendChild(node);
+      });
+
+      document.getElementById('commandLog').appendChild(lsNode);
     }
   }]);
 

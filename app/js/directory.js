@@ -15,6 +15,7 @@ var Directory = exports.Directory = function () {
         this.name = name;
         this.parent = parent;
         this.children = children;
+        this.isDirectory = true;
     }
 
     _createClass(Directory, [{

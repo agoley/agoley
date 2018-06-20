@@ -26,6 +26,8 @@ gulp watch
 
 - pwd
 
+- ls
+
 
 ## Coming up...
 ### Things being developed, in no order

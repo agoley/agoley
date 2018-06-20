@@ -5,7 +5,8 @@ export class Bin {
     this.commands = [
       { name: 'Ask-Alex', fn: this.askAlex },
       { name: 'clear', fn: this.clear },
-      { name: 'pwd', fn: this.pwd }
+      { name: 'pwd', fn: this.pwd },
+      { name: 'ls', fn: this.list }
     ];
   }
 
@@ -68,5 +69,24 @@ export class Bin {
     const pwdNode = document.createElement('p');
     pwdNode.innerText = window.app.workingDirectory.getPathFromRoot();
     document.getElementById('commandLog').appendChild(pwdNode);
+  }
+
+  list() {
+    const lsNode = document.createElement('div');
+    lsNode.classList.add('ls-node');
+
+    app.workingDirectory.children.forEach(i => {
+      const node = document.createElement('div');
+      if (i.isDirectory) {
+        node.innerHTML = i.name + '/';
+      } else {
+        node.innerHTML = i.name;
+      }
+      node.innerHTML
+      node.classList.add('ls-item-node');
+      lsNode.appendChild(node);
+    });
+
+    document.getElementById('commandLog').appendChild(lsNode);
   }
 }

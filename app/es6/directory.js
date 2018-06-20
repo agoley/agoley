@@ -2,11 +2,13 @@ export class Directory {
     children;
     parent;
     name;
+    isDirectory;
 
     constructor(name, parent, children) {
         this.name = name;
         this.parent = parent;
         this.children = children;
+        this.isDirectory = true;
     }
 
     getPathFromRoot() {

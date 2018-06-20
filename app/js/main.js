@@ -3613,7 +3613,7 @@ var Bin = exports.Bin = function () {
   function Bin() {
     _classCallCheck(this, Bin);
 
-    this.commands = [{ name: 'Ask-Alex', fn: this.askAlex }, { name: 'clear', fn: this.clear }, { name: 'pwd', fn: this.pwd }];
+    this.commands = [{ name: 'Ask-Alex', fn: this.askAlex }, { name: 'clear', fn: this.clear }, { name: 'pwd', fn: this.pwd }, { name: 'ls', fn: this.list }];
   }
 
   _createClass(Bin, [{
@@ -3680,6 +3680,26 @@ var Bin = exports.Bin = function () {
       pwdNode.innerText = window.app.workingDirectory.getPathFromRoot();
       document.getElementById('commandLog').appendChild(pwdNode);
     }
+  }, {
+    key: 'list',
+    value: function list() {
+      var lsNode = document.createElement('div');
+      lsNode.classList.add('ls-node');
+
+      app.workingDirectory.children.forEach(function (i) {
+        var node = document.createElement('div');
+        if (i.isDirectory) {
+          node.innerHTML = i.name + '/';
+        } else {
+          node.innerHTML = i.name;
+        }
+        node.innerHTML;
+        node.classList.add('ls-item-node');
+        lsNode.appendChild(node);
+      });
+
+      document.getElementById('commandLog').appendChild(lsNode);
+    }
   }]);
 
   return Bin;
@@ -3707,6 +3727,7 @@ var Directory = exports.Directory = function () {
         this.name = name;
         this.parent = parent;
         this.children = children;
+        this.isDirectory = true;
     }
 
     _createClass(Directory, [{
@@ -3768,9 +3789,9 @@ gamesDirectory.children.push(snakeFile);
 var pacmanFile = new _appFile.AppFile(null, gamesDirectory, 'pacman.sh');
 gamesDirectory.children.push(pacmanFile);
 var leaderboardFile = new _appFile.AppFile(null, gamesDirectory, 'leaderboard.txt');
-var algorithmsDirectory = new _directory.Directory('algorithms', homeDirectory, []);
-homeDirectory.children.push(algorithmsDirectory);
 app.workingDirectory = homeDirectory;
+var blogDirectory = new _directory.Directory('blog', homeDirectory, []);
+homeDirectory.children.push(blogDirectory);
 
 window.app = app;
 

@@ -9,7 +9,8 @@ const app = {};
 app.commandFactory = new CommandFactory();
 const rootDirectory = new Directory('', null, []);
 const homeDirectory = new Directory('home', rootDirectory, []);
-rootDirectory.children.push(rootDirectory);
+app.homeDirectory = homeDirectory;
+rootDirectory.children.push(homeDirectory);
 const gamesDirectory = new Directory('games', homeDirectory, []);
 homeDirectory.children.push(gamesDirectory);
 const snakeFile = new AppFile(null, gamesDirectory, 'snake.sh')

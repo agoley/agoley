@@ -28,6 +28,8 @@ gulp watch
 
 - ls
 
+- cd (one level)
+
 
 ## Coming up...
 ### Things being developed, in no order

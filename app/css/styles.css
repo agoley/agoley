@@ -32,5 +32,6 @@
   align-self: flex-start; }
 
 .ls-item-node {
+  color: magenta;
   padding: 1em;
   display: inline-block; }

@@ -12,6 +12,10 @@ export class Directory {
   }
 
   getPathFromRoot() {
+    if (!this.parent) {
+      return "/";
+    }
+
     let allDirectoriesUp = [];
 
     let curr = this;
@@ -20,17 +24,13 @@ export class Directory {
       curr = curr.parent;
     }
 
-    if (allDirectoriesUp.length === 0) {
-        return '/';
-    }
-
     return allDirectoriesUp.join("/");
   }
 
   getChildByName(name) {
     let child;
     this.children.forEach(element => {
-      if (element.name === name || './' + element.name === name) {
+      if (element.name === name || "./" + element.name === name) {
         child = element;
       }
     });

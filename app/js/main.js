@@ -3411,11 +3411,12 @@ var _bin = __webpack_require__(53);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var CommandFactory = exports.CommandFactory = function () {
-  function CommandFactory() {
+  function CommandFactory(app) {
     _classCallCheck(this, CommandFactory);
 
+    this.app = app;
     this.http = new _http.Http();
-    this.bin = new _bin.Bin();
+    this.bin = new _bin.Bin(app);
 
     this.initPrompt();
 
@@ -3610,9 +3611,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Bin = exports.Bin = function () {
-  function Bin() {
+  function Bin(app) {
     _classCallCheck(this, Bin);
 
+    this.app = app;
     this.commands = [{ name: "Ask-Alex", fn: this.askAlex }, { name: "clear", fn: this.clear }, { name: "pwd", fn: this.pwd }, { name: "ls", fn: this.list }, { name: "cd", fn: this.changeDirectory }];
   }
 
@@ -3630,7 +3632,7 @@ var Bin = exports.Bin = function () {
         return c.name === name;
       });
       if (command.length > 0) {
-        command[0].fn.apply(null, commandArr.slice(1));
+        command[0].fn.apply(this, commandArr.slice(1));
       } else {
         // TODO: handle unkown input.
         console.log("Unknown command");
@@ -3677,7 +3679,7 @@ var Bin = exports.Bin = function () {
     key: "pwd",
     value: function pwd(args) {
       var pwdNode = document.createElement("p");
-      pwdNode.innerText = window.app.workingDirectory.getPathFromRoot();
+      pwdNode.innerText = this.app.workingDirectory.getPathFromRoot();
       document.getElementById("commandLog").appendChild(pwdNode);
     }
   }, {
@@ -3686,7 +3688,7 @@ var Bin = exports.Bin = function () {
       var lsNode = document.createElement("div");
       lsNode.classList.add("ls-node");
 
-      app.workingDirectory.children.forEach(function (i) {
+      this.app.workingDirectory.children.forEach(function (i) {
         var node = document.createElement("div");
         if (i.isDirectory) {
           node.innerHTML = i.name + "/";
@@ -3704,17 +3706,17 @@ var Bin = exports.Bin = function () {
     key: "changeDirectory",
     value: function changeDirectory(args) {
       if (args === "..") {
-        if (app.workingDirectory.parent) {
-          app.workingDirectory = app.workingDirectory.parent;
+        if (this.app.workingDirectory.parent) {
+          this.app.workingDirectory = this.app.workingDirectory.parent;
         }
       }
       if (args === "~") {
-        window.app.workingDirectory = window.app.homeDirectory;
+        this.app.workingDirectory = this.app.homeDirectory;
       }
 
-      var child = window.app.workingDirectory.getChildByName(args);
+      var child = this.app.workingDirectory.getChildByName(args);
       if (child) {
-        window.app.workingDirectory = child;
+        this.app.workingDirectory = child;
       }
     }
   }]);
@@ -3808,25 +3810,29 @@ var _directory = __webpack_require__(54);
 
 var _appFile = __webpack_require__(28);
 
-var app = {};
-// @ts-ignore
-app.commandFactory = new _command.CommandFactory();
-var rootDirectory = new _directory.Directory('', null, []);
-var homeDirectory = new _directory.Directory('home', rootDirectory, []);
-app.homeDirectory = homeDirectory;
-rootDirectory.children.push(homeDirectory);
-var gamesDirectory = new _directory.Directory('games', homeDirectory, []);
-homeDirectory.children.push(gamesDirectory);
-var snakeFile = new _appFile.AppFile(null, gamesDirectory, 'snake.sh');
-gamesDirectory.children.push(snakeFile);
-var pacmanFile = new _appFile.AppFile(null, gamesDirectory, 'pacman.sh');
-gamesDirectory.children.push(pacmanFile);
-var leaderboardFile = new _appFile.AppFile(null, gamesDirectory, 'leaderboard.txt');
-app.workingDirectory = homeDirectory;
-var blogDirectory = new _directory.Directory('logs', homeDirectory, []);
-homeDirectory.children.push(blogDirectory);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-window.app = app;
+var App = function App() {
+  _classCallCheck(this, App);
+
+  this.commandFactory = new _command.CommandFactory(this);
+  var rootDirectory = new _directory.Directory("", null, []);
+  var homeDirectory = new _directory.Directory("home", rootDirectory, []);
+  this.homeDirectory = homeDirectory;
+  rootDirectory.children.push(homeDirectory);
+  var gamesDirectory = new _directory.Directory("games", homeDirectory, []);
+  homeDirectory.children.push(gamesDirectory);
+  var snakeFile = new _appFile.AppFile(null, gamesDirectory, "snake.sh");
+  gamesDirectory.children.push(snakeFile);
+  var pacmanFile = new _appFile.AppFile(null, gamesDirectory, "pacman.sh");
+  gamesDirectory.children.push(pacmanFile);
+  var leaderboardFile = new _appFile.AppFile(null, gamesDirectory, "leaderboard.txt");
+  this.workingDirectory = homeDirectory;
+  var blogDirectory = new _directory.Directory("logs", homeDirectory, []);
+  homeDirectory.children.push(blogDirectory);
+};
+
+var app = new App();
 
 /***/ }),
 /* 57 */

@@ -18,11 +18,12 @@ var _bin = require('./bin');
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var CommandFactory = exports.CommandFactory = function () {
-  function CommandFactory() {
+  function CommandFactory(app) {
     _classCallCheck(this, CommandFactory);
 
+    this.app = app;
     this.http = new _http.Http();
-    this.bin = new _bin.Bin();
+    this.bin = new _bin.Bin(app);
 
     this.initPrompt();
 

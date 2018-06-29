@@ -10,10 +10,12 @@ export class CommandFactory {
   commandCurrent;
   cursorNode;
   commandHistoryIndex;
+  app;
 
-  constructor() {
+  constructor(app) {
+    this.app = app;
     this.http = new Http();
-    this.bin = new Bin();
+    this.bin = new Bin(app);
 
     this.initPrompt();
 

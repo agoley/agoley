@@ -1,7 +1,9 @@
 export class Bin {
   commands;
+  app;
 
-  constructor() {
+  constructor(app) {
+    this.app = app;
     this.commands = [
       { name: "Ask-Alex", fn: this.askAlex },
       { name: "clear", fn: this.clear },
@@ -23,7 +25,7 @@ export class Bin {
       return c.name === name;
     });
     if (command.length > 0) {
-      command[0].fn.apply(null, commandArr.slice(1));
+      command[0].fn.apply(this, commandArr.slice(1));
     } else {
       // TODO: handle unkown input.
       console.log("Unknown command");
@@ -72,7 +74,7 @@ export class Bin {
 
   pwd(args) {
     const pwdNode = document.createElement("p");
-    pwdNode.innerText = window.app.workingDirectory.getPathFromRoot();
+    pwdNode.innerText = this.app.workingDirectory.getPathFromRoot();
     document.getElementById("commandLog").appendChild(pwdNode);
   }
 
@@ -80,7 +82,7 @@ export class Bin {
     const lsNode = document.createElement("div");
     lsNode.classList.add("ls-node");
 
-    app.workingDirectory.children.forEach(i => {
+    this.app.workingDirectory.children.forEach(i => {
       const node = document.createElement("div");
       if (i.isDirectory) {
         node.innerHTML = i.name + "/";
@@ -97,17 +99,17 @@ export class Bin {
 
   changeDirectory(args) {
     if (args === "..") {
-      if (app.workingDirectory.parent) {
-        app.workingDirectory = app.workingDirectory.parent;
+      if (this.app.workingDirectory.parent) {
+        this.app.workingDirectory = this.app.workingDirectory.parent;
       }
     }
     if (args === "~") {
-      window.app.workingDirectory = window.app.homeDirectory;
+      this.app.workingDirectory = this.app.homeDirectory;
     }
 
-    const child = window.app.workingDirectory.getChildByName(args);
+    const child = this.app.workingDirectory.getChildByName(args);
     if (child) {
-      window.app.workingDirectory = child;
+      this.app.workingDirectory = child;
     }
   }
 }

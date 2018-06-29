@@ -9,9 +9,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Bin = exports.Bin = function () {
-  function Bin() {
+  function Bin(app) {
     _classCallCheck(this, Bin);
 
+    this.app = app;
     this.commands = [{ name: "Ask-Alex", fn: this.askAlex }, { name: "clear", fn: this.clear }, { name: "pwd", fn: this.pwd }, { name: "ls", fn: this.list }, { name: "cd", fn: this.changeDirectory }];
   }
 
@@ -29,7 +30,7 @@ var Bin = exports.Bin = function () {
         return c.name === name;
       });
       if (command.length > 0) {
-        command[0].fn.apply(null, commandArr.slice(1));
+        command[0].fn.apply(this, commandArr.slice(1));
       } else {
         // TODO: handle unkown input.
         console.log("Unknown command");
@@ -76,7 +77,7 @@ var Bin = exports.Bin = function () {
     key: "pwd",
     value: function pwd(args) {
       var pwdNode = document.createElement("p");
-      pwdNode.innerText = window.app.workingDirectory.getPathFromRoot();
+      pwdNode.innerText = this.app.workingDirectory.getPathFromRoot();
       document.getElementById("commandLog").appendChild(pwdNode);
     }
   }, {
@@ -85,7 +86,7 @@ var Bin = exports.Bin = function () {
       var lsNode = document.createElement("div");
       lsNode.classList.add("ls-node");
 
-      app.workingDirectory.children.forEach(function (i) {
+      this.app.workingDirectory.children.forEach(function (i) {
         var node = document.createElement("div");
         if (i.isDirectory) {
           node.innerHTML = i.name + "/";
@@ -103,17 +104,17 @@ var Bin = exports.Bin = function () {
     key: "changeDirectory",
     value: function changeDirectory(args) {
       if (args === "..") {
-        if (app.workingDirectory.parent) {
-          app.workingDirectory = app.workingDirectory.parent;
+        if (this.app.workingDirectory.parent) {
+          this.app.workingDirectory = this.app.workingDirectory.parent;
         }
       }
       if (args === "~") {
-        window.app.workingDirectory = window.app.homeDirectory;
+        this.app.workingDirectory = this.app.homeDirectory;
       }
 
-      var child = window.app.workingDirectory.getChildByName(args);
+      var child = this.app.workingDirectory.getChildByName(args);
       if (child) {
-        window.app.workingDirectory = child;
+        this.app.workingDirectory = child;
       }
     }
   }]);

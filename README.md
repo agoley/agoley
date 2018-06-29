@@ -43,6 +43,8 @@ gulp watch
 - Directory traversal (ls, cd) - INPROGRESS
 
     - traverse multiple levels using '../..' or 'child/grandchild'
+    
+    - output for directory not found
 
 - games (see snek, and pacman repos) - TODO
 

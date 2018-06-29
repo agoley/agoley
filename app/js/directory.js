@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -19,7 +19,7 @@ var Directory = exports.Directory = function () {
   }
 
   _createClass(Directory, [{
-    key: "getPathFromRoot",
+    key: 'getPathFromRoot',
     value: function getPathFromRoot() {
       var allDirectoriesUp = [];
 
@@ -29,10 +29,14 @@ var Directory = exports.Directory = function () {
         curr = curr.parent;
       }
 
+      if (allDirectoriesUp.length === 0) {
+        return '/';
+      }
+
       return allDirectoriesUp.join("/");
     }
   }, {
-    key: "getChildByName",
+    key: 'getChildByName',
     value: function getChildByName(name) {
       var child = void 0;
       this.children.forEach(function (element) {

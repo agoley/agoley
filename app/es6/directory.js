@@ -20,6 +20,10 @@ export class Directory {
       curr = curr.parent;
     }
 
+    if (allDirectoriesUp.length === 0) {
+        return '/';
+    }
+
     return allDirectoriesUp.join("/");
   }
 

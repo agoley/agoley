@@ -103,7 +103,9 @@ var Bin = exports.Bin = function () {
     key: "changeDirectory",
     value: function changeDirectory(args) {
       if (args === "..") {
-        app.workingDirectory = app.workingDirectory.parent;
+        if (app.workingDirectory.parent) {
+          app.workingDirectory = app.workingDirectory.parent;
+        }
       }
       if (args === "~") {
         window.app.workingDirectory = window.app.homeDirectory;

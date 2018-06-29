@@ -28,7 +28,7 @@ gulp watch
 
 - ls
 
-- cd (one level)
+- cd (one level down, '..', '~')
 
 
 ## Coming up...
@@ -42,7 +42,11 @@ gulp watch
 
 - Directory traversal (ls, cd) - INPROGRESS
 
+    - traverse multiple levels using '../..' or 'child/grandchild'
+
 - games (see snek, and pacman repos) - TODO
+
+- Auto complete on tab
 
 - games leaderboard - TODO
 

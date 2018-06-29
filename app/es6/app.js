@@ -19,7 +19,7 @@ const pacmanFile = new AppFile(null, gamesDirectory, 'pacman.sh')
 gamesDirectory.children.push(pacmanFile);
 const leaderboardFile = new AppFile(null, gamesDirectory, 'leaderboard.txt');
 app.workingDirectory = homeDirectory;
-const blogDirectory = new Directory('blog', homeDirectory, []);
+const blogDirectory = new Directory('log', homeDirectory, []);
 homeDirectory.children.push(blogDirectory);
 
 window.app = app;

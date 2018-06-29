@@ -3823,7 +3823,7 @@ var pacmanFile = new _appFile.AppFile(null, gamesDirectory, 'pacman.sh');
 gamesDirectory.children.push(pacmanFile);
 var leaderboardFile = new _appFile.AppFile(null, gamesDirectory, 'leaderboard.txt');
 app.workingDirectory = homeDirectory;
-var blogDirectory = new _directory.Directory('blog', homeDirectory, []);
+var blogDirectory = new _directory.Directory('log', homeDirectory, []);
 homeDirectory.children.push(blogDirectory);
 
 window.app = app;

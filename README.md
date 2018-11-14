@@ -58,7 +58,7 @@ gulp watch
 
 - blog - TODO
   
-- Routing (client-side) - TODO
+- Routing (client-side) - INPROGRESS
   
 
 

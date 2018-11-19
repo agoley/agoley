@@ -29,7 +29,9 @@ class App {
   }
 
   initRoutes() {
-    this.router.sync();
+    setTimeout(() => {
+      this.router.sync();
+    }, 500);
   }
 }
 const app = new App();

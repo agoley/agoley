@@ -38,7 +38,11 @@ var App = function () {
   _createClass(App, [{
     key: "initRoutes",
     value: function initRoutes() {
-      this.router.sync();
+      var _this = this;
+
+      setTimeout(function () {
+        _this.router.sync();
+      }, 500);
     }
   }]);
 

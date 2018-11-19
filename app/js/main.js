@@ -3806,7 +3806,7 @@ var MinimalRouter = exports.MinimalRouter = function () {
 
   /**
    * Constructs a new router.
-   * @param {*} e 
+   * @param {*} e
    */
   function MinimalRouter() {
     _classCallCheck(this, MinimalRouter);
@@ -3870,7 +3870,12 @@ var MinimalRouter = exports.MinimalRouter = function () {
   }, {
     key: "sync",
     value: function sync() {
-      this.handleRoute(this.getPath());
+      var _this = this;
+
+      console.log("sync");
+      setTimeout(function () {
+        _this.handleRoute(_this.getPath());
+      }, 100);
     }
   }]);
 
@@ -3936,7 +3941,11 @@ var App = function () {
   _createClass(App, [{
     key: "initRoutes",
     value: function initRoutes() {
-      this.router.sync();
+      var _this = this;
+
+      setTimeout(function () {
+        _this.router.sync();
+      }, 500);
     }
   }]);
 

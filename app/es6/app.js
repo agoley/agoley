@@ -1,10 +1,12 @@
-import { Http } from "./http";
 import { CommandFactory } from "./command.factory";
 import { Directory } from "./directory";
 import { AppFile } from "./app-file";
+import { MinimalRouter } from "./router.class";
 
 class App {
   constructor() {
+    this.router = new MinimalRouter();
+    this.initRoutes();
     this.commandFactory = new CommandFactory(this);
     const rootDirectory = new Directory("", null, []);
     const homeDirectory = new Directory("home", rootDirectory, []);
@@ -24,6 +26,10 @@ class App {
     this.workingDirectory = homeDirectory;
     const blogDirectory = new Directory("logs", homeDirectory, []);
     homeDirectory.children.push(blogDirectory);
+  }
+
+  initRoutes() {
+    this.router.sync();
   }
 }
 const app = new App();

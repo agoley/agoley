@@ -2,7 +2,7 @@
 Thanks for checking out my portfolio, it's currently under development but you can follow the progress here. 
 
 
-Use the app: https://agoley.github.io/agoley/
+Use the app: http://www.agoley.com/
 
 
 ## Development

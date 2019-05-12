@@ -115,11 +115,6 @@ gulp.task("watch", ["browserSync"], function() {
 });
 
 gulp.task("browserSync", ["build"], function() {
-  // browserSync.init({
-  //   server: {
-  //     baseDir: 'app'
-  //   }
-  // });
   browserSync.init(null, {
     open: false,
     server: {

@@ -3,13 +3,14 @@
  * Route specific handling is left to your implementation.
  */
 export class MinimalRouter {
-  routes; // Acts as a registry for actionable routes.
+  routes; // Acts as a registry for actionable routes. Contains two fields path, and cb (callback).
 
   /**
    * Constructs a new router.
    * @param {*} e
    */
   constructor() {
+
     this.routes = [];
   }
 
@@ -18,6 +19,16 @@ export class MinimalRouter {
    * @param {*} route
    */
   addRoute(route) {
+
+    if (!route.path) {
+
+      console.error('MinimalRouter: Route missing path field');
+    }
+
+    if (!route.cb) {
+
+      console.log('MinimalRouter: Route missing cb field');
+    }
     this.routes.push(route);
   }
 
@@ -32,6 +43,7 @@ export class MinimalRouter {
    * @param {*} path
    */
   navigateByURL(path) {
+
     window.history.pushState({}, path, window.location.origin + path);
     this.handleRoute(path);
   }
@@ -41,15 +53,27 @@ export class MinimalRouter {
    * @returns {Array} params
    */
   getParams() {
+
     return [];
   }
 
   getPath() {
+
     return window.location.pathname;
   }
 
   handleRoute(path) {
-    console.log(path);
+
+    for (let i = 0; i < this.routes.length; i++) {
+
+      if (this.routes[i].path === path) {
+
+        this.routes[i].cb(path);
+        return;
+      }
+    }
+
+    console.error('MinimalRouter: No route found for path ' + path);
   }
 
   sync() {

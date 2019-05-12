@@ -2885,7 +2885,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Route specific handling is left to your implementation.
  */
 var MinimalRouter = exports.MinimalRouter = function () {
-  // Acts as a registry for actionable routes.
+  // Acts as a registry for actionable routes. Contains two fields path, and cb (callback).
 
   /**
    * Constructs a new router.
@@ -2904,8 +2904,18 @@ var MinimalRouter = exports.MinimalRouter = function () {
 
 
   _createClass(MinimalRouter, [{
-    key: "addRoute",
+    key: 'addRoute',
     value: function addRoute(route) {
+
+      if (!route.path) {
+
+        console.error('MinimalRouter: Route missing path field');
+      }
+
+      if (!route.cb) {
+
+        console.log('MinimalRouter: Route missing cb field');
+      }
       this.routes.push(route);
     }
 
@@ -2915,7 +2925,7 @@ var MinimalRouter = exports.MinimalRouter = function () {
      */
 
   }, {
-    key: "removeRoute",
+    key: 'removeRoute',
     value: function removeRoute(route) {}
 
     /**
@@ -2924,8 +2934,9 @@ var MinimalRouter = exports.MinimalRouter = function () {
      */
 
   }, {
-    key: "navigateByURL",
+    key: 'navigateByURL',
     value: function navigateByURL(path) {
+
       window.history.pushState({}, path, window.location.origin + path);
       this.handleRoute(path);
     }
@@ -2936,22 +2947,34 @@ var MinimalRouter = exports.MinimalRouter = function () {
      */
 
   }, {
-    key: "getParams",
+    key: 'getParams',
     value: function getParams() {
+
       return [];
     }
   }, {
-    key: "getPath",
+    key: 'getPath',
     value: function getPath() {
+
       return window.location.pathname;
     }
   }, {
-    key: "handleRoute",
+    key: 'handleRoute',
     value: function handleRoute(path) {
-      console.log(path);
+
+      for (var i = 0; i < this.routes.length; i++) {
+
+        if (this.routes[i].path === path) {
+
+          this.routes[i].cb(path);
+          return;
+        }
+      }
+
+      console.error('MinimalRouter: No route found for path ' + path);
     }
   }, {
-    key: "sync",
+    key: 'sync',
     value: function sync() {
       var _this = this;
 
@@ -3003,7 +3026,9 @@ var App = function () {
     _classCallCheck(this, App);
 
     this.router = new _router.MinimalRouter();
+    this.router.addRoute({ path: '/logs', cb: onLogsRoute });
     this.initRoutes();
+
     this.commandFactory = new _command.CommandFactory(this);
     var rootDirectory = new _directory.Directory("", null, []);
     var homeDirectory = new _directory.Directory("home", rootDirectory, []);
@@ -3034,6 +3059,20 @@ var App = function () {
 
   return App;
 }();
+
+var hideCommandLog = function hideCommandLog() {
+  document.getElementById('commandLog').style.display = 'none';
+};
+
+var hideAsciiMe = function hideAsciiMe() {
+  document.getElementById('asciiMe').style.display = 'none';
+};
+
+var onLogsRoute = function onLogsRoute(path) {
+  hideAsciiMe();
+  hideCommandLog();
+  console.log(path);
+};
 
 var app = new App();
 

@@ -6,7 +6,9 @@ import { MinimalRouter } from "./router.class";
 class App {
   constructor() {
     this.router = new MinimalRouter();
+    this.router.addRoute({ path: '/logs', cb: onLogsRoute });
     this.initRoutes();
+
     this.commandFactory = new CommandFactory(this);
     const rootDirectory = new Directory("", null, []);
     const homeDirectory = new Directory("home", rootDirectory, []);
@@ -34,4 +36,19 @@ class App {
     }, 500);
   }
 }
+
+const hideCommandLog = () => {
+  document.getElementById('commandLog').style.display = 'none';
+}
+
+const hideAsciiMe = () => {
+  document.getElementById('asciiMe').style.display = 'none';
+}
+
+const onLogsRoute = (path) => {
+  hideAsciiMe();
+  hideCommandLog();
+  console.log(path)
+}
+
 const app = new App();

@@ -17,7 +17,9 @@ var App = function () {
     _classCallCheck(this, App);
 
     this.router = new _router.MinimalRouter();
+    this.router.addRoute({ path: '/logs', cb: onLogsRoute });
     this.initRoutes();
+
     this.commandFactory = new _command.CommandFactory(this);
     var rootDirectory = new _directory.Directory("", null, []);
     var homeDirectory = new _directory.Directory("home", rootDirectory, []);
@@ -48,5 +50,19 @@ var App = function () {
 
   return App;
 }();
+
+var hideCommandLog = function hideCommandLog() {
+  document.getElementById('commandLog').style.display = 'none';
+};
+
+var hideAsciiMe = function hideAsciiMe() {
+  document.getElementById('asciiMe').style.display = 'none';
+};
+
+var onLogsRoute = function onLogsRoute(path) {
+  hideAsciiMe();
+  hideCommandLog();
+  console.log(path);
+};
 
 var app = new App();

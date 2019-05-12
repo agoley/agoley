@@ -25,8 +25,9 @@ export class CommandFactory {
   }
 
   initPrompt(command) {
+    console.log('init')
     forkJoin([
-      this.http.get('https://ipinfo.io/?callback=', null, true),
+      this.http.get('https://api.ipify.org?format=json', null, true),
       this.http.get(
         'https://cors.io/?https://uzby.com/api.php?min=3&max=8',
         null,

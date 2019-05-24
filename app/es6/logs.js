@@ -6,7 +6,7 @@ export class Logs {
     logRef.classList.add("log-body");
     const logHeaderRef = document.createElement("h2");
     logHeaderRef.innerHTML =
-      "Surviving with Lower Back Pain, The Complete Guide for Everyone.";
+      "Surviving with Lower Back Pain, How to Treat Yourself Non Invasively.";
     const uploadedOnDivDivRef = document.createElement("div");
     uploadedOnDivDivRef.innerHTML = "May 22, 2019";
 

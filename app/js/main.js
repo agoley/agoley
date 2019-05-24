@@ -3047,7 +3047,7 @@ var Logs = exports.Logs = function () {
       var logRef = document.createElement("div");
       logRef.classList.add("log-body");
       var logHeaderRef = document.createElement("h2");
-      logHeaderRef.innerHTML = "Surviving with Lower Back Pain, The Complete Guide for Everyone.";
+      logHeaderRef.innerHTML = "Surviving with Lower Back Pain, How to Treat Yourself Non Invasively.";
       var uploadedOnDivDivRef = document.createElement("div");
       uploadedOnDivDivRef.innerHTML = "May 22, 2019";
 

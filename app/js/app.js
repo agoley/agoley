@@ -10,6 +10,8 @@ var _appFile = require("./app-file");
 
 var _router = require("./router.class");
 
+var _logs = require("./logs");
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var App = function () {
@@ -17,7 +19,9 @@ var App = function () {
     _classCallCheck(this, App);
 
     this.router = new _router.MinimalRouter();
-    this.router.addRoute({ path: '/logs', cb: onLogsRoute });
+    this.router.addRoute({ path: '/back-pain-log', cb: onBackPainRoute });
+    this.logs = new _logs.Logs();
+
     this.initRoutes();
 
     this.commandFactory = new _command.CommandFactory(this);
@@ -53,16 +57,17 @@ var App = function () {
 
 var hideCommandLog = function hideCommandLog() {
   document.getElementById('commandLog').style.display = 'none';
+  document.getElementById('welcomeParagraph').style.display = 'none';
 };
 
 var hideAsciiMe = function hideAsciiMe() {
   document.getElementById('asciiMe').style.display = 'none';
 };
 
-var onLogsRoute = function onLogsRoute(path) {
+var onBackPainRoute = function onBackPainRoute(path) {
   hideAsciiMe();
   hideCommandLog();
-  console.log(path);
+  app.logs.displayBackPainLog();
 };
 
 var app = new App();

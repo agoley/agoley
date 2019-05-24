@@ -62,11 +62,34 @@ export class MinimalRouter {
     return window.location.pathname;
   }
 
+  doesRouteMatch(registeredRoute, checkRoute) {
+    if (registeredRoute === checkRoute) {
+      return true;
+    }
+
+    const wildcardRegex = /(\w+)/g
+    r1.replace(wildcardRegex, '*');
+
+    const splitPath1 = registeredRoute.split('/');
+    const splitPath2 = checkRoute.split('/');
+
+    if (splitPath1.length != splitPath2) {
+      return false;
+    }
+
+    for (let i = 0; i < splitPath1.length; i++) {
+      if (splitPath1[i] != '*' && splitPath1[i] != splitPath2[i]) {
+        return false;
+      }
+    }
+
+  }
+
   handleRoute(path) {
 
     for (let i = 0; i < this.routes.length; i++) {
 
-      if (this.routes[i].path === path) {
+      if (this.doesRouteMatch(this.routes[i].path, path)) {
 
         this.routes[i].cb(path);
         return;

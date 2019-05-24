@@ -2,11 +2,14 @@ import { CommandFactory } from "./command.factory";
 import { Directory } from "./directory";
 import { AppFile } from "./app-file";
 import { MinimalRouter } from "./router.class";
+import { Logs } from "./logs"
 
 class App {
   constructor() {
     this.router = new MinimalRouter();
-    this.router.addRoute({ path: '/logs', cb: onLogsRoute });
+    this.router.addRoute({ path: '/back-pain-log', cb: onBackPainRoute });
+    this.logs = new Logs();
+
     this.initRoutes();
 
     this.commandFactory = new CommandFactory(this);
@@ -39,16 +42,17 @@ class App {
 
 const hideCommandLog = () => {
   document.getElementById('commandLog').style.display = 'none';
+  document.getElementById('welcomeParagraph').style.display = 'none';
 }
 
 const hideAsciiMe = () => {
   document.getElementById('asciiMe').style.display = 'none';
 }
 
-const onLogsRoute = (path) => {
+const onBackPainRoute = (path) => {
   hideAsciiMe();
   hideCommandLog();
-  console.log(path)
+  app.logs.displayBackPainLog();
 }
 
 const app = new App();

@@ -16,6 +16,10 @@
   animation: blinker 1s linear infinite;
 }
 
+.log-body {
+  margin: 25px;
+}
+
 @keyframes blinker {
   50% {
     opacity: 0;

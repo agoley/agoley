@@ -87,12 +87,35 @@ var MinimalRouter = exports.MinimalRouter = function () {
       return window.location.pathname;
     }
   }, {
+    key: 'doesRouteMatch',
+    value: function doesRouteMatch(registeredRoute, checkRoute) {
+      if (registeredRoute === checkRoute) {
+        return true;
+      }
+
+      var wildcardRegex = /(\w+)/g;
+      r1.replace(wildcardRegex, '*');
+
+      var splitPath1 = registeredRoute.split('/');
+      var splitPath2 = checkRoute.split('/');
+
+      if (splitPath1.length != splitPath2) {
+        return false;
+      }
+
+      for (var i = 0; i < splitPath1.length; i++) {
+        if (splitPath1[i] != '*' && splitPath1[i] != splitPath2[i]) {
+          return false;
+        }
+      }
+    }
+  }, {
     key: 'handleRoute',
     value: function handleRoute(path) {
 
       for (var i = 0; i < this.routes.length; i++) {
 
-        if (this.routes[i].path === path) {
+        if (this.doesRouteMatch(this.routes[i].path, path)) {
 
           this.routes[i].cb(path);
           return;

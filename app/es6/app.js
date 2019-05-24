@@ -2,7 +2,7 @@ import { CommandFactory } from "./command.factory";
 import { Directory } from "./directory";
 import { AppFile } from "./app-file";
 import { MinimalRouter } from "./router.class";
-import { Logs } from "./logs"
+import { Logs } from "./logs";
 
 class App {
   constructor() {

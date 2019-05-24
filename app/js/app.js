@@ -19,7 +19,7 @@ var App = function () {
     _classCallCheck(this, App);
 
     this.router = new _router.MinimalRouter();
-    this.router.addRoute({ path: '/back-pain-log', cb: onBackPainRoute });
+    this.router.addRoute({ path: '/surviving-back-pain', cb: onBackPainRoute });
     this.logs = new _logs.Logs();
 
     this.initRoutes();

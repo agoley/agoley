@@ -84,13 +84,21 @@ export class Bin {
 
     this.app.workingDirectory.children.forEach(i => {
       const node = document.createElement("div");
+      console.log(i);
       if (i.isDirectory) {
         node.innerHTML = i.name + "/";
+        node.classList.add("ls-item-node");
       } else {
-        node.innerHTML = i.name;
+        if (i.link) {
+          node.innerHTML = "<a href='" + i.link + "'>" + i.name + "</a>";
+          node.style.padding = "1em";
+          node.style.display = "inline-block";
+        } else {
+          node.innerHTML = i.name;
+          node.classList.add("ls-item-node");
+        }
       }
       node.innerHTML;
-      node.classList.add("ls-item-node");
       lsNode.appendChild(node);
     });
 

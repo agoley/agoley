@@ -30,6 +30,8 @@ class App {
     );
     this.workingDirectory = homeDirectory;
     const blogDirectory = new Directory("logs", homeDirectory, []);
+    const survivingLowerBackPainFile = new AppFile(null, blogDirectory, "surviving_lower_back_pain_the_non_invasive_way.log", '/surviving-back-pain');
+    blogDirectory.children.push(survivingLowerBackPainFile);
     homeDirectory.children.push(blogDirectory);
   }
 

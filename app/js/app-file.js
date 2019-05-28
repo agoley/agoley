@@ -6,10 +6,11 @@ Object.defineProperty(exports, "__esModule", {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var AppFile = exports.AppFile = function AppFile(contentNode, directory, name) {
+var AppFile = exports.AppFile = function AppFile(contentNode, directory, name, link) {
     _classCallCheck(this, AppFile);
 
     this.contentNode = contentNode;
     this.directory = directory;
     this.name = name;
+    this.link = link;
 };

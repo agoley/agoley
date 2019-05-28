@@ -3,9 +3,10 @@ export class AppFile {
     directory;
     name;
 
-    constructor (contentNode, directory, name) {
+    constructor (contentNode, directory, name, link) {
         this.contentNode = contentNode;
         this.directory = directory;
         this.name = name;
+        this.link = link;
     }
 }

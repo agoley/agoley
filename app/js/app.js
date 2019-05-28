@@ -38,6 +38,8 @@ var App = function () {
     var leaderboardFile = new _appFile.AppFile(null, gamesDirectory, "leaderboard.txt");
     this.workingDirectory = homeDirectory;
     var blogDirectory = new _directory.Directory("logs", homeDirectory, []);
+    var survivingLowerBackPainFile = new _appFile.AppFile(null, blogDirectory, "surviving_lower_back_pain_the_non_invasive_way.log", '/surviving-back-pain');
+    blogDirectory.children.push(survivingLowerBackPainFile);
     homeDirectory.children.push(blogDirectory);
   }
 

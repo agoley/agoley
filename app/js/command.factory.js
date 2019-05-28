@@ -29,12 +29,6 @@ var CommandFactory = exports.CommandFactory = function () {
 
     document.onkeyup = this.onInput.bind(this);
     window.addEventListener("keydown", this.onkeydown, false);
-
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-
-      // This is a mobile device.
-      prompt();
-    }
   }
 
   _createClass(CommandFactory, [{

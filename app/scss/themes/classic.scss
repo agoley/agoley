@@ -1,6 +1,7 @@
 $background: rgb(30, 30, 30);
 $foreground: rgb(215, 215, 215);
 $neon-green: #83f52c;
+$accent: rgb(255,0,255);
 
 .classic {
   background-color: $background;
@@ -18,5 +19,9 @@ $neon-green: #83f52c;
 
   a {
     color: $neon-green;
+  }
+
+  .accent {
+    color: $accent;
   }
 }

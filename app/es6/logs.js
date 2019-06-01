@@ -87,7 +87,7 @@ export class Logs {
       "<p style='font-size: 24px;'><b>Step 3 - Chiropractor</b></p>" +
       "<p>A good chiropractor will be your best friend during the process and the adjustments will accelerate your recovery. Like therapy a chiropractor is not 100% necessary to recover but If you can afford the time and money, I would suggest seeing one once your pain levels have decreased to a manageable level. </p>" +
       "<p style='font-size: 24px;'><b>Step 4 - Never forget</b></p>" +
-      "<p>This article is titled surviving lower back pain not curing it. Never forget that debilitating pain and always practice your streching and mobility. Stay consious about your insides and listen to your body. </p>";
+      "<p>This article is titled surviving lower back pain not curing it. Never forget that debilitating pain and always practice your streching and mobility. Stay consious about your spine and listen to your body. </p>";
 
     const connectNode = document.createElement("p");
     connectNode.classList.add("ask-alex");

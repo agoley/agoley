@@ -3,6 +3,7 @@ export class Logs {
 
   displayBackPainLog() {
     document.getElementById('title').innerHTML = "agoley - surviving back pain";
+    document.getElementById('meta').innerHTML = "one consolidated approach to ridding yourself from lower back pain non invasively.";
     const logRef = document.createElement("div");
     logRef.classList.add("log-body");
     const logHeaderRef = document.createElement("h1");

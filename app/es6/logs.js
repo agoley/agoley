@@ -2,6 +2,7 @@ export class Logs {
   constructor() {}
 
   displayBackPainLog() {
+    document.getElementById('title').innerHTML = "agoley - surviving back pain";
     const logRef = document.createElement("div");
     logRef.classList.add("log-body");
     const logHeaderRef = document.createElement("h1");

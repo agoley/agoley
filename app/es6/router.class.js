@@ -67,8 +67,11 @@ export class MinimalRouter {
       return true;
     }
 
-    const wildcardRegex = /(\w+)/g
-    r1.replace(wildcardRegex, '*');
+    // No sure what I was doing here, but it doesn't seem necessary.
+    // The if in the for loop ignores any * path in the registered route.
+    
+    // const wildcardRegex = /(\w+)/g
+    // r1.replace(wildcardRegex, '*');
 
     const splitPath1 = registeredRoute.split('/');
     const splitPath2 = checkRoute.split('/');

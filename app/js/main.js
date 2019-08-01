@@ -1788,7 +1788,7 @@ var CommandFactory = exports.CommandFactory = function () {
       var _this = this;
 
       console.log("init");
-      (0, _rxjs.forkJoin)([this.http.get("https://api.ipify.org?format=json", null, true), this.http.get("https://cors.io/?https://uzby.com/api.php?min=3&max=8", null, true)]).subscribe(function (data) {
+      (0, _rxjs.forkJoin)([this.http.get("https://api.ipify.org?format=json", null, true), this.http.get("https://cors-anywhere.herokuapp.com/https://uzby.com/api.php?min=3&max=8", null, true)]).subscribe(function (data) {
         _this.constructPromptNodeTemplate(data);
         _this.newPrompt();
       });
@@ -2978,8 +2978,11 @@ var MinimalRouter = exports.MinimalRouter = function () {
         return true;
       }
 
-      var wildcardRegex = /(\w+)/g;
-      r1.replace(wildcardRegex, '*');
+      // Not sure what I was doing here, but it doesn't seem necessary.
+      // The if in the for loop ignores any * path in the registered route.
+
+      // const wildcardRegex = /(\w+)/g
+      // r1.replace(wildcardRegex, '*');
 
       var splitPath1 = registeredRoute.split('/');
       var splitPath2 = checkRoute.split('/');
@@ -3045,8 +3048,10 @@ var Logs = exports.Logs = function () {
   }
 
   _createClass(Logs, [{
-    key: "displayBackPainLog",
+    key: 'displayBackPainLog',
     value: function displayBackPainLog() {
+      document.getElementById('title').innerHTML = "agoley - surviving back pain";
+      document.getElementById('meta').innerHTML = "one consolidated approach to ridding yourself from lower back pain non invasively.";
       var logRef = document.createElement("div");
       logRef.classList.add("log-body");
       var logHeaderRef = document.createElement("h1");
@@ -3141,6 +3146,7 @@ var App = function () {
     _classCallCheck(this, App);
 
     this.router = new _router.MinimalRouter();
+    this.router.addRoute({ path: '/', cb: function cb() {} });
     this.router.addRoute({ path: '/surviving-back-pain', cb: onBackPainRoute });
     this.logs = new _logs.Logs();
 

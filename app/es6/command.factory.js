@@ -28,7 +28,7 @@ export class CommandFactory {
     forkJoin([
       this.http.get("https://api.ipify.org?format=json", null, true),
       this.http.get(
-        "https://cors.io/?https://uzby.com/api.php?min=3&max=8",
+        "https://cors-anywhere.herokuapp.com/https://uzby.com/api.php?min=3&max=8",
         null,
         true
       )

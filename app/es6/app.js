@@ -7,6 +7,7 @@ import { Logs } from "./logs";
 class App {
   constructor() {
     this.router = new MinimalRouter();
+    this.router.addRoute({ path: '/', cb: () => {} });
     this.router.addRoute({ path: '/surviving-back-pain', cb: onBackPainRoute });
     this.logs = new Logs();
 

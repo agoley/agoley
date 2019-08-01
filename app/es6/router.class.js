@@ -67,7 +67,7 @@ export class MinimalRouter {
       return true;
     }
 
-    // No sure what I was doing here, but it doesn't seem necessary.
+    // Not sure what I was doing here, but it doesn't seem necessary.
     // The if in the for loop ignores any * path in the registered route.
     
     // const wildcardRegex = /(\w+)/g

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -14,8 +14,10 @@ var Logs = exports.Logs = function () {
   }
 
   _createClass(Logs, [{
-    key: "displayBackPainLog",
+    key: 'displayBackPainLog',
     value: function displayBackPainLog() {
+      document.getElementById('title').innerHTML = "agoley - surviving back pain";
+      document.getElementById('meta').innerHTML = "one consolidated approach to ridding yourself from lower back pain non invasively.";
       var logRef = document.createElement("div");
       logRef.classList.add("log-body");
       var logHeaderRef = document.createElement("h1");

@@ -9,6 +9,7 @@ class App {
     this.router = new MinimalRouter();
     this.router.addRoute({ path: '/', cb: () => {} });
     this.router.addRoute({ path: '/surviving-back-pain', cb: onBackPainRoute });
+    this.router.addRoute({ path: '/best-dev-life', cb: onBestDevRoute });
     this.logs = new Logs();
 
     this.initRoutes();
@@ -33,6 +34,8 @@ class App {
     const blogDirectory = new Directory("logs", homeDirectory, []);
     const survivingLowerBackPainFile = new AppFile(null, blogDirectory, "surviving_lower_back_pain_the_non_invasive_way.log", '/surviving-back-pain');
     blogDirectory.children.push(survivingLowerBackPainFile);
+    const bestDevLifeFile = new AppFile(null, blogDirectory, "how_to_live_your_best_dev_life.log", '/best-dev-life');
+    blogDirectory.children.push(bestDevLifeFile);
     homeDirectory.children.push(blogDirectory);
   }
 
@@ -56,6 +59,12 @@ const onBackPainRoute = (path) => {
   hideAsciiMe();
   hideCommandLog();
   app.logs.displayBackPainLog();
+}
+
+const onBestDevRoute = (path) => {
+  hideAsciiMe();
+  hideCommandLog();
+  app.logs.displayBestDevLifeLog();
 }
 
 const app = new App();

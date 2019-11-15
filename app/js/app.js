@@ -21,6 +21,7 @@ var App = function () {
     this.router = new _router.MinimalRouter();
     this.router.addRoute({ path: '/', cb: function cb() {} });
     this.router.addRoute({ path: '/surviving-back-pain', cb: onBackPainRoute });
+    this.router.addRoute({ path: '/best-dev-life', cb: onBestDevRoute });
     this.logs = new _logs.Logs();
 
     this.initRoutes();
@@ -41,6 +42,8 @@ var App = function () {
     var blogDirectory = new _directory.Directory("logs", homeDirectory, []);
     var survivingLowerBackPainFile = new _appFile.AppFile(null, blogDirectory, "surviving_lower_back_pain_the_non_invasive_way.log", '/surviving-back-pain');
     blogDirectory.children.push(survivingLowerBackPainFile);
+    var bestDevLifeFile = new _appFile.AppFile(null, blogDirectory, "how_to_live_your_best_dev_life.log", '/best-dev-life');
+    blogDirectory.children.push(bestDevLifeFile);
     homeDirectory.children.push(blogDirectory);
   }
 
@@ -71,6 +74,12 @@ var onBackPainRoute = function onBackPainRoute(path) {
   hideAsciiMe();
   hideCommandLog();
   app.logs.displayBackPainLog();
+};
+
+var onBestDevRoute = function onBestDevRoute(path) {
+  hideAsciiMe();
+  hideCommandLog();
+  app.logs.displayBestDevLifeLog();
 };
 
 var app = new App();

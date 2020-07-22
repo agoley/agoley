@@ -28,8 +28,10 @@ export class CommandFactory {
     forkJoin([
       this.http.get("https://api.ipify.org?format=json", null, true),
       this.http.get(
-        "https://cors-anywhere.herokuapp.com/https://uinames.com/api/?region=United+States",
-        null,
+        "https://cors-anywhere.herokuapp.com/https://api.namefake.com/english-united-states/random",
+        {
+          ["X-Requested-With"]: "XMLHttpRequest"
+        },
         true
       )
     ]).subscribe(data => {
@@ -51,7 +53,7 @@ export class CommandFactory {
 
     return (
       data[1].name.slice(0, 1).toLowerCase() +
-      data[1].surname.slice(0, 6).toLowerCase() +
+      data[1].email_u +
       "@" +
       ipinfo.ip
     );

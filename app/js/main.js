@@ -1766,6 +1766,8 @@ var _command = __webpack_require__(52);
 
 var _bin = __webpack_require__(53);
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var CommandFactory = exports.CommandFactory = function () {
@@ -1788,7 +1790,7 @@ var CommandFactory = exports.CommandFactory = function () {
       var _this = this;
 
       console.log("init");
-      (0, _rxjs.forkJoin)([this.http.get("https://api.ipify.org?format=json", null, true), this.http.get("https://cors-anywhere.herokuapp.com/https://uinames.com/api/?region=United+States", null, true)]).subscribe(function (data) {
+      (0, _rxjs.forkJoin)([this.http.get("https://api.ipify.org?format=json", null, true), this.http.get("https://cors-anywhere.herokuapp.com/https://api.namefake.com/english-united-states/random", _defineProperty({}, "X-Requested-With", "XMLHttpRequest"), true)]).subscribe(function (data) {
         _this.constructPromptNodeTemplate(data);
         _this.newPrompt();
       });
@@ -1807,7 +1809,7 @@ var CommandFactory = exports.CommandFactory = function () {
       var ipinfo = JSON.parse(data[0]);
       data[1] = JSON.parse(data[1]);
 
-      return data[1].name.slice(0, 1).toLowerCase() + data[1].surname.slice(0, 6).toLowerCase() + "@" + ipinfo.ip;
+      return data[1].name.slice(0, 1).toLowerCase() + data[1].email_u + "@" + ipinfo.ip;
     }
   }, {
     key: "onkeydown",

@@ -54,10 +54,11 @@ export class CommandFactory {
 
     if (isMobile.any()) {
       console.log("is mobile");
-      this.input = document.createElement("input");
-      this.input.style.display = "none";
-      document.body.appendChild(this.input);
-      this.input.focus();
+      // this.input = document.createElement("input");
+      // this.input.style.display = "none";
+      // document.body.appendChild(this.input);
+      // this.input.focus();
+      prompt();
     }
   }
 

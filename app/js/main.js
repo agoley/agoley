@@ -322,6 +322,34 @@ var CommandFactory = /*#__PURE__*/function () {
     this.initPrompt();
     document.onkeyup = this.onInput.bind(this);
     window.addEventListener("keydown", this.onkeydown, false);
+    var isMobile = {
+      Android: function Android() {
+        return navigator.userAgent.match(/Android/i);
+      },
+      BlackBerry: function BlackBerry() {
+        return navigator.userAgent.match(/BlackBerry/i);
+      },
+      iOS: function iOS() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+      },
+      Opera: function Opera() {
+        return navigator.userAgent.match(/Opera Mini/i);
+      },
+      Windows: function Windows() {
+        return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
+      },
+      any: function any() {
+        return isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows();
+      }
+    };
+
+    if (isMobile.any()) {
+      console.log("is mobile");
+      this.input = document.createElement("input");
+      this.input.style.display = "none";
+      document.body.appendChild(this.input);
+      this.input.focus();
+    }
   }
 
   _createClass(CommandFactory, [{

@@ -21,6 +21,44 @@ export class CommandFactory {
 
     document.onkeyup = this.onInput.bind(this);
     window.addEventListener("keydown", this.onkeydown, false);
+
+    var isMobile = {
+      Android: function () {
+        return navigator.userAgent.match(/Android/i);
+      },
+      BlackBerry: function () {
+        return navigator.userAgent.match(/BlackBerry/i);
+      },
+      iOS: function () {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+      },
+      Opera: function () {
+        return navigator.userAgent.match(/Opera Mini/i);
+      },
+      Windows: function () {
+        return (
+          navigator.userAgent.match(/IEMobile/i) ||
+          navigator.userAgent.match(/WPDesktop/i)
+        );
+      },
+      any: function () {
+        return (
+          isMobile.Android() ||
+          isMobile.BlackBerry() ||
+          isMobile.iOS() ||
+          isMobile.Opera() ||
+          isMobile.Windows()
+        );
+      },
+    };
+
+    if (isMobile.any()) {
+      console.log("is mobile");
+      this.input = document.createElement("input");
+      this.input.style.display = "none";
+      document.body.appendChild(this.input);
+      this.input.focus();
+    }
   }
 
   initPrompt(command) {

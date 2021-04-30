@@ -344,12 +344,16 @@ var CommandFactory = /*#__PURE__*/function () {
     };
 
     if (isMobile.any()) {
-      console.log("is mobile"); // this.input = document.createElement("input");
-      // this.input.style.display = "none";
-      // document.body.appendChild(this.input);
-      // this.input.focus();
+      console.log("is mobile");
+      this.input = document.createElement("input");
+      this.input.style.display = "none";
+      document.body.appendChild(this.input);
 
-      prompt();
+      this.input.onclick = function (e) {
+        e.target.focus();
+      };
+
+      this.input.click();
     }
   }
 

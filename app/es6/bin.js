@@ -22,7 +22,7 @@ export class Bin {
     const name = commandArr[0];
 
     const command = this.commands.filter(c => {
-      return c.name === name;
+      return c.name.toLowerCase() === name.toLowerCase();
     });
     if (command.length > 0) {
       command[0].fn.apply(this, commandArr.slice(1));

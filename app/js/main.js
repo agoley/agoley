@@ -188,7 +188,7 @@ var Bin = /*#__PURE__*/function () {
       var commandArr = commandStr.split(" ");
       var name = commandArr[0];
       var command = this.commands.filter(function (c) {
-        return c.name === name;
+        return c.name.toLowerCase() === name.toLowerCase();
       });
 
       if (command.length > 0) {

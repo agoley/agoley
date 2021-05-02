@@ -38,3 +38,23 @@
   display: inline-block;
 }
 
+.media-frame {
+  padding: 5px 5px 2px 5px;
+  display: inline-block;
+  background: rgb(195, 195, 195);
+  margin: 1em 0;
+}
+
+
+.media-frame > div {
+  display: flex;
+  height: 25px;
+  width: 100%;
+  margin-bottom: 5px;
+  background: rgb(2, 13, 128);
+}
+
+.media-frame > div > span{
+  margin: auto 10px;
+  font-size: 12px;
+}

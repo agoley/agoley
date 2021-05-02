@@ -211,7 +211,12 @@ function imagesTask(cb) {
 // //   return gulp.src("app/images/**/*").pipe(gulp.dest("assets/images"));
 // // });
 
-const buildApp = series(ref, sassTask, fontsTask, imagesTask);
+function videosTask(cb) {
+  src("app/video/**/*").pipe(dest("assets/video"));
+  cb();
+}
+
+const buildApp = series(ref, sassTask, fontsTask, imagesTask, videosTask);
 exports.buildApp = buildApp;
 
 // exports.build = buildTask;

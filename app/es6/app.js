@@ -7,9 +7,13 @@ import { Logs } from "./logs";
 class App {
   constructor() {
     this.router = new MinimalRouter();
-    this.router.addRoute({ path: '/', cb: () => {} });
-    this.router.addRoute({ path: '/surviving-back-pain', cb: onBackPainRoute });
-    this.router.addRoute({ path: '/best-dev-life', cb: onBestDevRoute });
+    this.router.addRoute({ path: "/", cb: () => {} });
+    this.router.addRoute({ path: "/surviving-back-pain", cb: onBackPainRoute });
+    this.router.addRoute({ path: "/best-dev-life", cb: onBestDevRoute });
+    this.router.addRoute({
+      path: "/nike-invincible-flynit",
+      cb: onNikeInvincibleRoute,
+    });
     this.logs = new Logs();
 
     this.initRoutes();
@@ -32,10 +36,27 @@ class App {
     );
     this.workingDirectory = homeDirectory;
     const blogDirectory = new Directory("logs", homeDirectory, []);
-    const survivingLowerBackPainFile = new AppFile(null, blogDirectory, "surviving_lower_back_pain_the_non_invasive_way.log", '/surviving-back-pain');
+    const survivingLowerBackPainFile = new AppFile(
+      null,
+      blogDirectory,
+      "surviving_lower_back_pain_the_non_invasive_way.log",
+      "/surviving-back-pain"
+    );
     blogDirectory.children.push(survivingLowerBackPainFile);
-    const bestDevLifeFile = new AppFile(null, blogDirectory, "how_to_live_your_best_dev_life.log", '/best-dev-life');
+    const bestDevLifeFile = new AppFile(
+      null,
+      blogDirectory,
+      "how_to_live_your_best_dev_life.log",
+      "/best-dev-life"
+    );
     blogDirectory.children.push(bestDevLifeFile);
+    const nikeInvincibleFile = new AppFile(
+      null,
+      blogDirectory,
+      "nike-invincible-flynit-review.log",
+      "/nike-invincible-flynit"
+    );
+    blogDirectory.children.push(nikeInvincibleFile);
     homeDirectory.children.push(blogDirectory);
   }
 
@@ -47,24 +68,30 @@ class App {
 }
 
 const hideCommandLog = () => {
-  document.getElementById('commandLog').style.display = 'none';
-  document.getElementById('welcomeParagraph').style.display = 'none';
-}
+  document.getElementById("commandLog").style.display = "none";
+  document.getElementById("welcomeParagraph").style.display = "none";
+};
 
 const hideAsciiMe = () => {
-  document.getElementById('asciiMe').style.display = 'none';
-}
+  document.getElementById("asciiMe").style.display = "none";
+};
 
 const onBackPainRoute = (path) => {
   hideAsciiMe();
   hideCommandLog();
   app.logs.displayBackPainLog();
-}
+};
 
 const onBestDevRoute = (path) => {
   hideAsciiMe();
   hideCommandLog();
   app.logs.displayBestDevLifeLog();
-}
+};
+
+const onNikeInvincibleRoute = (path) => {
+  hideAsciiMe();
+  hideCommandLog();
+  app.logs.displayNikeInvincibleFlynitReviewLog();
+};
 
 const app = new App();
